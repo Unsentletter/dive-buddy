@@ -1,0 +1,12 @@
+{
+  "test": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/DiveBuddyTest",
+    "JWT_SECRET": "sdlfknfvi9834ijnlk24j3nfkjn909uwdfjnkl23"
+  },
+  "development": {
+    "PORT": 3000,
+    "MONGODB_URI": "mongodb://localhost:27017/DiveBuddy",
+    "JWT_SECRET": "wefiuherg987y42iuhrtiuh"
+  }
+}

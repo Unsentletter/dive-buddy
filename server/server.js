@@ -9,9 +9,9 @@ const { mongoose } = require('./db/mongoose');
 const { User } = require('./models/user');
 const { authenticate } = require('./middleware/authenticate');
 
-const PORT = process.env.PORT;
-
 const app = express();
+
+const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 

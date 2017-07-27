@@ -46,7 +46,7 @@ const bcrypt = require('bcryptjs');
    let token = jwt.sign({
      _id: user._id.toHexString(),
      access
-   }, '11111111').toString();
+   }, process.env.JWT_SECRET).toString();
 
    user.tokens.push({ access, token });
 
@@ -55,12 +55,22 @@ const bcrypt = require('bcryptjs');
    })
  };
 
+ UserSchema.methods.removeToken = function(token) {
+   const user = this;
+
+   return user.update({
+     $pull: {
+       tokens: { token }
+     }
+   });
+ };
+
  UserSchema.statics.findByToken = function(token) {
    const User = this;
    let decoded;
 
    try {
-     decoded = jwt.verify(token, '11111111');
+     decoded = jwt.verify(token, process.env.JWT_SECRET);
    } catch (err) {
      return Promise.reject();
    }

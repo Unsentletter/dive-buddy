@@ -1,3 +1,5 @@
+require('./config/config');
+
 const express = require ('express');
 const bodyParser = require('body-parser');
 const { ObjectId } = require('mongodb');
@@ -7,7 +9,7 @@ const { mongoose } = require('./db/mongoose');
 const { User } = require('./models/user');
 const { authenticate } = require('./middleware/authenticate');
 
-const PORT = 3000;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -32,7 +34,7 @@ app.get('/users/me', authenticate, (req, res) => {
 });
 
 app.post('/users/login', (req, res) => {
-  const body = _.pick(req.body, ['email', 'password'])
+  const body = _.pick(req.body, ['email', 'password']);
 
   User.findByCredentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) => {
@@ -40,7 +42,15 @@ app.post('/users/login', (req, res) => {
     })
   }).catch((err) => {
     res.status(400).send();
-  })
+  });
+});
+
+app.delete('/users/me/token', authenticate, (req, res) => {
+  req.user.removeToken(req.token).then(() => {
+    res.status(200).send();
+  }), () => {
+    res.status(400).send();
+  }
 });
 
 app.listen(`${PORT}`, () => {

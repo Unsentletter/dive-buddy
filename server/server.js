@@ -8,26 +8,17 @@ const _ = require('lodash');
 const { mongoose } = require('./db/mongoose');
 const { User } = require('./models/user');
 const { authenticate } = require('./middleware/authenticate');
+const routes = require('./routes/index');
 
 const app = express();
 
 const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use('/v1', routes);
 
-app.post('/users', (req, res) => {
-  const body = _.pick(req.body, ['email', 'password']);
 
-  const user = new User(body);
-
-  user.save().then(() => {
-    return user.generateAuthToken();
-  }).then((token) => {
-    res.header('x-auth', token).send(user);
-  }).catch((err) => {
-    res.status(400).send(err);
-  })
-});
+// app.post('/users', );
 
 app.get('/users/me', authenticate, (req, res) => {
   res.send(req.user);
@@ -55,13 +46,15 @@ app.delete('/users/me/token', authenticate, (req, res) => {
 
 app.post('/users/profile', authenticate, (req, res) => {
   const body = _.pick(req.body, ['username', 'description']);
-  const user = {_id: req.user._id};
+  const id = {_id: req.user._id};
 
   User.findOneAndUpdate(
-    user,
-    body
-  ).then(() => {
-    res.send(user);
+    id,
+    body,
+    {new: true}
+  ).then((data) => {
+    console.log(data);
+    res.send(data);
   })
 });
 

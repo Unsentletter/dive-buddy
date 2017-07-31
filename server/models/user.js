@@ -30,7 +30,16 @@ const bcrypt = require('bcryptjs');
       type: String,
       required: true
     }
-  }]
+  }],
+   username: {
+    type: String,
+    minLength: 3,
+    unique: true
+   },
+   description: {
+    type: String,
+    minlength: 10
+   }
 });
 
  UserSchema.methods.toJSON = function() {

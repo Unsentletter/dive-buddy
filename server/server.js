@@ -53,6 +53,18 @@ app.delete('/users/me/token', authenticate, (req, res) => {
   }
 });
 
+app.post('/users/profile', authenticate, (req, res) => {
+  const body = _.pick(req.body, ['username', 'description']);
+  const user = {_id: req.user._id};
+
+  User.findOneAndUpdate(
+    user,
+    body
+  ).then(() => {
+    res.send(user);
+  })
+});
+
 app.listen(`${PORT}`, () => {
   console.log(`****Started on port ${PORT}****`)
 });

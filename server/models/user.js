@@ -33,8 +33,7 @@ const bcrypt = require('bcryptjs');
   }],
    username: {
     type: String,
-    minLength: 3,
-    unique: true
+    minLength: 3
    },
    description: {
     type: String,

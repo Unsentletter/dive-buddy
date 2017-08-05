@@ -6,7 +6,7 @@
   },
   "development": {
     "PORT": 3000,
-    "MONGODB_URI": "mongodb://localhost:27017/DiveBuddy",
+    "MONGODB_URI": "mongodb://heroku_s8432tx6:18n7p8657obb6g5tu3016sl9ho@ds127063.mlab.com:27063/heroku_s8432tx6",
     "JWT_SECRET": "wefiuherg987y42iuhrtiuh"
   }
 }

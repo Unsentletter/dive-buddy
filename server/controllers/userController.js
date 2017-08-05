@@ -8,6 +8,7 @@ module.exports = {
     const body = _.pick(req.body, ['email', 'password']);
 
     const user = new User(body);
+    console.log(body);
 
     user.save().then(() => {
       return user.generateAuthToken();

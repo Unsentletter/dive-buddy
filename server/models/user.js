@@ -31,13 +31,16 @@ const bcrypt = require('bcryptjs');
       required: true
     }
   }],
-   username: {
+  username: {
     type: String,
     minLength: 3
    },
-   description: {
+  description: {
     type: String,
     minlength: 10
+   },
+  numberOfDives: {
+    type: String
    }
 });
 

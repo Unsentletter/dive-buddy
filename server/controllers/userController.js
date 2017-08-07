@@ -8,7 +8,6 @@ module.exports = {
     const body = _.pick(req.body, ['email', 'password']);
 
     const user = new User(body);
-    console.log(body);
 
     user.save().then(() => {
       return user.generateAuthToken();
@@ -18,10 +17,11 @@ module.exports = {
       res.status(400).send(err);
     })
   },
+
   getUser: (req, res) => {
-    console.log(req);
     res.send(req.user);
   },
+
   loginUser: (req, res) => {
   const body = _.pick(req.body, ['email', 'password']);
 
@@ -33,6 +33,7 @@ module.exports = {
       res.status(400).send();
     });
   },
+
   deleteUser: (req, res) => {
     req.user.removeToken(req.token).then(() => {
       res.status(200).send();
@@ -40,18 +41,21 @@ module.exports = {
       res.status(400).send();
     }
   },
-  updateProfile: (req, res) => {
-    console.log(req.user);
-    const body = _.pick(req.body, ['username', 'description']);
-    const id = {_id: req.user._id};
 
+  updateProfile: (req, res) => {
+    const body = _.pick(req.body, ['username', 'description', 'numberOfDives']);
+    const id = {_id: req.user._id};
+    
     User.findOneAndUpdate(
       id,
       body,
       {new: true}
     ).then((data) => {
-      console.log(data);
-      res.send(data);
+      res.send({
+        username: data.username,
+        description: data.description,
+        numberOfDives: data.numberOfDives
+      });
     })
   }
 };

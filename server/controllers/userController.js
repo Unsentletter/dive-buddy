@@ -45,7 +45,7 @@ module.exports = {
   updateProfile: (req, res) => {
     const body = _.pick(req.body, ['username', 'description', 'numberOfDives']);
     const id = {_id: req.user._id};
-    
+
     User.findOneAndUpdate(
       id,
       body,

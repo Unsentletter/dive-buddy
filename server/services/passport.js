@@ -10,11 +10,9 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id)
-    .then(user => {
-      done(null, user);
-    })
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
 });
 
 passport.use(new FacebookStrategy(
@@ -22,21 +20,17 @@ passport.use(new FacebookStrategy(
     clientID: keys.facebookClientID,
     clientSecret: keys.facebookClientSecret,
     callbackURL: '/auth/facebook/callback',
-    proxy: true
+    proxy: true,
+    profileFields: ['emails']
   },
-  (accessToken, refreshToken, profile, done) => {
-    console.log('access', accessToken);
-    console.log('profile', profile);
-    User.findOne({ facebookId: profile.id })
-      .then((existingUser) => {
-        if(existingUser) {
-          console.log('existing', existingUser);
-          done(null, existingUser);
-        } else {
-          new User({ facebookId: profile.id })
-            .save()
-            .then(user => { done(null, user) })
-        }
-      });
+  async (accessToken, refreshToken, profile, done) => {
+    const existingUser = await User.findOne({ facebookId: profile.id });
+
+    if(existingUser) {
+      return done(null, existingUser);
+    }
+
+    const user = await new User({ facebookId: profile.id, email: profile.emails[0].value }).save();
+    done(null, user)
   })
 );

@@ -2,7 +2,7 @@ const passport = require('passport');
 
 module.exports = (app) => {
   app.get('/auth/facebook', passport.authenticate('facebook', {
-    scope: ['email']
+    scope: ['public_profile']
   }));
 
   app.get('/auth/facebook/callback',

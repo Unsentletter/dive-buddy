@@ -30,7 +30,7 @@ passport.use(new FacebookStrategy(
       return done(null, existingUser);
     }
 
-    const user = await new User({ facebookId: profile.id, email: profile.emails[0].value, firstName: profile.name.givenName, profilePhoto: profile.photos[0].value }).save();
+    const user = await new User({ facebookId: profile.id, email: profile.emails[0].value, firstName: profile.name.givenName, profilePhoto: profile.photos[0].value, dateJoined: Date.now() }).save();
     done(null, user)
   })
 );

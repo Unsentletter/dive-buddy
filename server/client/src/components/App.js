@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing';
-const Profile = () => <h1>Profile</h1>;
+import Profile from './Profile';
 
 class App extends Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <BrowserRouter>
           <div>
             <Header />
@@ -27,4 +28,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps, actions)(App);

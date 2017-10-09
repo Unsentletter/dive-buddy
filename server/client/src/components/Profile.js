@@ -13,11 +13,10 @@ class Profile extends Component {
         return;
       default:
         const img = this.props.auth.profilePhoto;
-        console.log(img);
         return [
           <p key="email">{this.props.auth.email}</p>,
           <p key="username">{this.props.auth.firstName}</p>,
-          <img key="img" src="https://scontent.xx.fbcdn.net/v/t1.0-1/p200x200/6898_10153412022742513_651009032096670910_n.jpg?oh=42ccb32a365cf20a60d136059a3723c0&oe=5A3DC088" alt=":("></img>
+          <img key="img" src={img} alt=":("></img>
         ]
     }
   }

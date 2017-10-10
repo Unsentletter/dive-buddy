@@ -7,10 +7,12 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 import Profile from './Profile';
+import NearbyBuddies from './NearbyBuddies';
 
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.getUserLocation();
   }
 
   render() {
@@ -20,7 +22,8 @@ class App extends Component {
           <div>
             <Header />
             <Route exact path='/' component={Landing} />
-            <Route exact path='/profile' component={Profile}/>
+            <Route exact path='/profile' component={Profile} />
+            <Route path='/nearby_buddies' component={NearbyBuddies} />
           </div>
         </BrowserRouter>
       </div>

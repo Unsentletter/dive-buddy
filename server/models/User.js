@@ -6,7 +6,9 @@ const userSchema = new Schema({
   email: String,
   firstName: String,
   profilePhoto: String,
-  dateJoined: Date
+  dateJoined: Date,
+  latitude: Number,
+  longitude: Number
 });
 
 mongoose.model('users', userSchema);

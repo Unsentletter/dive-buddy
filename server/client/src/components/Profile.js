@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as actions from '../actions';
 
 class Profile extends Component {
   renderContent() {
-    console.log(this.props.auth);
     switch (this.props.auth) {
       case null:
         return;
@@ -21,6 +21,10 @@ class Profile extends Component {
     }
   }
 
+  getUserLocation() {
+
+  }
+
   render() {
     return (
       <div>
@@ -28,6 +32,9 @@ class Profile extends Component {
         <h3>
           {this.renderContent()}
         </h3>
+        <Link to={'/nearby_buddies'}>
+        <button className="btn">Search for dive buddies</button>
+        </Link>
       </div>
     )
   }

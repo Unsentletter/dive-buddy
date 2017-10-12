@@ -32,7 +32,7 @@ class Profile extends Component {
         <h3>
           {this.renderContent()}
         </h3>
-        <h1>Testing CodeShip still</h1>
+        <h1>Testing CodeShip still and still</h1>
         <Link to={'/nearby_buddies'}>
         <button className="btn">Search for dive buddies</button>
         </Link>

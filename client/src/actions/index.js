@@ -14,13 +14,10 @@ export const getUserLocation = () => async dispatch => {
   const success = async(position) => {
     console.log('position', position);
     const res = await axios.post('/api/current_location', {
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude
+      location: [position.coords.latitude, position.coords.longitude]
     });
 
     dispatch({ type: FETCH_USER, payload: res.data })
   };
   const location = await geolocation.getCurrentPosition(success);
-
-
 };

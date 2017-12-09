@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const LocationSchema = require('./Location');
 
 const userSchema = new Schema({
   facebookId: String,
@@ -7,8 +8,7 @@ const userSchema = new Schema({
   firstName: String,
   profilePhoto: String,
   dateJoined: Date,
-  latitude: Number,
-  longitude: Number
+  location: [LocationSchema]
 });
 
 mongoose.model('users', userSchema);

@@ -12,7 +12,7 @@ import NearbyBuddies from './NearbyBuddies';
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
-    // this.props.getUserLocation();
+    this.props.getUserLocation();
   }
 
   render() {

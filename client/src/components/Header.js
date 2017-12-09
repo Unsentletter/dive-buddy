@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
   renderContent() {
-    console.log('header state', this.props.auth);
     switch (this.props.auth) {
       case null:
         return;
